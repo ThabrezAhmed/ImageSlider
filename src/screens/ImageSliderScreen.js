@@ -37,6 +37,7 @@ const ImageSliderScreen = () => {
     dispatch(getImages());
   }, []);
 
+  //local functions
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     dispatch(filterImages());

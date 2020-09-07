@@ -6,14 +6,14 @@ import {
   filterImages,
 } from '../actions/';
 import {getAPI} from '../../api';
-import {randNumbers} from '../../utils/helperFunctions';
+import apiConst from '../../constants/apiConst';
 
-const url = 'https://picsum.photos/list';
+// const url = 'https://picsum.photos/list';
 
 function* getImagesAsync(action) {
   try {
     yield put(setImageStatus('STARTED'));
-    const imageDetails = yield call(getAPI, url);
+    const imageDetails = yield call(getAPI, apiConst.imageDetails);
     const {status, data} = imageDetails;
     if (status === 200) {
       yield put(getImageDetailsAsync(data));

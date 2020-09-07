@@ -1,18 +1,19 @@
 import {GET_IMAGES_ASYNC, CHANGE_IMAGE_STATUS, FILTER_IMAGES} from '../actions';
 import {randNumbers} from '../../utils/helperFunctions';
+import apiConst from '../../constants/apiConst';
+
 const initialState = {
   status: 'NOT_STARTED',
   data: {},
   filteredData: {},
 };
+
 const imageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_IMAGES_ASYNC:
-      // debugger;
       return {...state, data: action.payload};
 
     case FILTER_IMAGES:
-      // debugger;
       let imageData = {};
       try {
         let randomArr = [];
@@ -28,14 +29,13 @@ const imageReducer = (state = initialState, action) => {
         let imagesArr = [];
         let authorArr = [];
         filteredData.forEach(element => {
-          imagesArr.push(`https://picsum.photos/200/300?image=${element.id}`);
+          imagesArr.push(apiConst.imageUrl + `${element.id}`);
           authorArr.push(element.author);
         });
         imageData = {
           imageUrl: imagesArr,
           authorName: authorArr,
         };
-        // debugger;
         return {...state, filteredData: imageData, status: 'SUCCESS'};
       } catch (err) {
         alert('error in filter' + err);
